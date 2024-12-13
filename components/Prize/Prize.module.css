@@ -1,0 +1,64 @@
+.prizeContainer {
+    display: flex;
+    border-radius: 5px;
+    height: 77px;
+    width: 353px;
+    color: black;
+    background-color: whitesmoke;
+    font-family: 'Muller';
+    padding: 10px;
+    align-items: center;
+
+}
+
+.prizeContainer img {
+    width: 55px;
+    height: 59px;
+    padding-right: 10px;
+}
+
+.yellow {
+    background: linear-gradient(90deg, rgba(255, 221, 0, 1),
+     rgba(255, 221, 0, 1),
+     rgba(255, 210, 3, 1),
+     rgba(254, 194, 0, 1),
+     rgba(254, 194, 0, 1) 
+    );
+}
+
+.name {
+    font-size: 16px;
+    font-weight: 100;
+    line-height: 18px;
+    text-align: left;
+    max-width: 162px;
+
+}
+
+.price {
+    font-family: "MullerMedium";
+    font-size: 16px;
+    font-weight: 100;
+    line-height: 16px;
+    margin-left: auto;
+    padding: 0;
+}
+
+
+.image {
+    width: 41px;
+    height: 59px;
+    top: 44px;
+    left: 26px;
+    gap: 0px;
+    opacity: 0px;
+}
+
+.white {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.black {
+    background-color: rgba(0, 0, 0, 1);
+    color: rgba(255, 255, 255, 1);
+}

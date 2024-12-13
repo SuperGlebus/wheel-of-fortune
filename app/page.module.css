@@ -1,6 +1,19 @@
 .container {
     width: 100%;
     height: 100svh;
+    background-size: cover;
+}
+
+.prizesContainer {
+    display: flex;
+    flex-direction: column;
+    background-size: cover;
+    height: 100svh;
+    justify-content: center;
+    padding-top: 50px;
+    margin-left: 40px;
+    gap: 20px;
+    
 }
 
 .wheelContainer {
@@ -44,11 +57,11 @@
 
 .buttonImage {
     padding-top: 6px;
-    position: fixed;
+    position: relative;
 }
 
 .buttonRam {
-    position: fixed;
+    position: absolute;
 }
 
 .buttonText {
@@ -77,4 +90,11 @@ Read more: https://drafts.csswg.org/css-inline-3/#leading-trim
     color: #FFFFFF;
 
 
+}
+
+.bold {
+    font-family: 'MullerMedium';
+    color: black;
+    font-size: 16px;
+    line-height: 18px;
 }

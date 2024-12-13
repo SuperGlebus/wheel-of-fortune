@@ -1,27 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono,  } from "next/font/google";
+import localFont from 'next/font/local'
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const Muller = Geist({
-  variable: "--font-muller",
-  subsets: ["latin"],
-})
-
-export const metadata: Metadata = {
-  title: "Колусо фартуны",
-  description: "Крути колесо, получай призы!",
-};
-
+const Muller = localFont({ src: './MullerRegular.woff2' })
+const MullerMedium = localFont({ src: './MullerMedium.woff2' })
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -30,7 +13,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${Muller.variable} ${Muller.variable} antialiased`}
+        className={`${Muller.className} ${MullerMedium.className}`}
       >
         {children}
       </body>
