@@ -60,10 +60,6 @@ export default function Home({ params }: { params: Promise<{ tgId: string }> }) 
         wheel.style.transition = "none";
         rotation -= rotation;
       }
-      const prize = await getNotWonPrize(tgId).catch((error) => {
-        console.error(error);
-        return null;
-      });
     }, 4200);
 
     
