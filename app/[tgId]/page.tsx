@@ -98,6 +98,7 @@ export default function Home({ params }: { params: Promise<{ tgId: string }> }) 
         </div>
       </div>
       <div className={styles.prizesContainer}>
+        <Image src="/bonuses.png" alt="logo" width={150} height={34}/>
         < Prize color="white" price="990₽" image="/1.png">
           <span className={styles.bold}>ТОП 3 способа раскачать ТГ канал</span> раскачать тг канал
         </Prize>
