@@ -2,36 +2,44 @@
 import Image from "next/image";
 import styles from "../page.module.css";
 import { useEffect, useState } from "react";
-import { getNotWonPrize } from "../../lib/db/db";
+import { getNotWonPrize, winPrize } from "../../lib/db/db";
 import { Prize } from "@/components/Prize/Prize";
+import { PrizeEntity } from "@/lib/db/definitions";
+import { PopupWindow } from "@/components/PopupWindow/PopupWindow";
 
 export default function Home({ params }: { params: Promise<{ tgId: string }> }) {
   let rotation = 0;
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [tgId, setTgId] = useState("");
+  const [currentPrize, setCurrentPrize] = useState<PrizeEntity | null>(null);
   useEffect(() => {
     const fetchTgId = async () => {
       const tgId = (await params).tgId
       setTgId(tgId)
       console.log("TgId", tgId);
-    }
-    fetchTgId()
+      if (tgId) {
+        const prize = await getNotWonPrize(tgId);
+        if (prize) {
+          setCurrentPrize(prize);
+        }
+
+      }
+    };
+    fetchTgId();
+
+
   }, []);
+
 
   async function spinButton() {
     console.log("spin");
-    const numOfPrize = await getNotWonPrize(tgId).catch((error) => {
-      console.log("Problem with getNotWonPrize");
-      console.error(error);
-      return null;
-    });
-    console.log(numOfPrize);
 
-    if (!numOfPrize) {
+    if (!currentPrize) {
       console.log("all prizes won");
       return;
     }
 
-    const degrees = Math.floor(numOfPrize * 45 - Math.random() * 45) + 720;
+    const degrees = Math.floor(currentPrize.id * 45 - Math.random() * 45) + 720;
     rotation += degrees;
     const wheel = document.querySelector("#wheel") as HTMLElement | null;
     if (!wheel) {
@@ -41,19 +49,32 @@ export default function Home({ params }: { params: Promise<{ tgId: string }> }) 
 
     wheel.style.transition = "transform 3s ease-out";
     wheel.style.transform = `rotate(${-rotation}deg)`;
-
-    setTimeout(() => {
+    setTimeout(async() => {
       console.log("stop");
+      const isWon = await winPrize(tgId, currentPrize.id);
+      if (isWon) {
+        setIsPopupOpen(true);
+      }
       if (wheel) {
         wheel.style.transform = "none";
         wheel.style.transition = "none";
         rotation -= rotation;
       }
-    }, 4000);
+      const prize = await getNotWonPrize(tgId).catch((error) => {
+        console.error(error);
+        return null;
+      });
+    }, 4200);
+
+    
+
+
+    
   }
 
   return (
     <div>
+      
       <div className={styles.container}>
         <div className={styles.wheelContainer}>
           <Image
@@ -98,33 +119,34 @@ export default function Home({ params }: { params: Promise<{ tgId: string }> }) 
         </div>
       </div>
       <div className={styles.prizesContainer}>
-        <Image src="/bonuses.png" alt="logo" width={150} height={34}/>
-        < Prize color="white" price="990₽" image="/1.png">
+        <Image src="/bonuses.png" alt="logo" width={150} height={34} />
+        < Prize color="white" price="990₽" image="/8.png">
           <span className={styles.bold}>ТОП 3 способа раскачать ТГ канал</span> раскачать тг канал
         </Prize>
-        < Prize color="white" price="5490₽" image="/2.png">
+        < Prize color="white" price="5490₽" image="/4.png">
           Мини–курс «Как получать подписчиков от <span className={styles.bold}>12 руб из Директа»</span>
         </Prize>
-        < Prize color="white" price="990₽" image="/3.png">
-        Как получить от 30 <span className={styles.bold}>до 100 заявок за 48 часов</span>
+        < Prize color="white" price="990₽" image="/1.png">
+          Как получить от 30 <span className={styles.bold}>до 100 заявок за 48 часов</span>
         </Prize>
-        < Prize color="yellow" price="2490₽" image="/5.png">
-        Схема продаж <span className={styles.bold}>через 3 Лендинга</span>
+        < Prize color="yellow" price="2490₽" image="/6.png">
+          Схема продаж <span className={styles.bold}>через 3 Лендинга</span>
         </Prize>
-        < Prize color="white" price="10 000₽/час" image="/4.png">
-        Личный Разбор
-        с пошаговым планом <span className={styles.bold}>на 500 тыс. руб</span>
-        </Prize>
-        < Prize color="white" price="" image="/6.png">
-        Скидка на продукты <span className={styles.bold}>30% на 24 часа</span>
+        < Prize color="white" price="10 000₽/час" image="/3.png">
+          Личный Разбор
+          с пошаговым планом <span className={styles.bold}>на 500 тыс. руб</span>
         </Prize>
         < Prize color="white" price="" image="/7.png">
-        Скидка на продукты <span className={styles.bold}>50% на 1 час</span>
+          Скидка на продукты <span className={styles.bold}>30% на 24 часа</span>
         </Prize>
-        < Prize color="black" price="15 000 – 35 000₽" image="/8.png">
-        Бонус Х
+        < Prize color="white" price="" image="/2.png">
+          Скидка на продукты <span className={styles.bold}>50% на 1 час</span>
+        </Prize>
+        < Prize color="black" price="15 000 – 35 000₽" image="/5.png">
+          Бонус Х
         </Prize>
       </div>
+      {currentPrize && <PopupWindow prize={currentPrize} isOpen={isPopupOpen} />}
     </div>
   );
 }
