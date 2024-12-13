@@ -18,7 +18,8 @@ export function PopupWindow({ prize, isOpen }:
                 <Image className={styles.Img} src={prize?.image || ""} alt={"приз"} width={150} height={150}/>
                 <p className={styles.name}>{prize?.name}</p>
                 <p className={styles.price}>{prize?.price}</p>
-                <button className={styles.Button}>Забрать приз</button>
+                
+                <button className={styles.Button}><a href="https://t.me/wv_mars">Забрать приз</a></button>
             </div>
             
         </div>
