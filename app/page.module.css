@@ -2,6 +2,7 @@
     width: 100svw;
     height: 100svh;
     background-size: cover;
+    align-items: center;
 }
 
 .prizesContainer {
@@ -16,6 +17,7 @@
 }
 
 .wheelContainer {
+    margin-top: 7svh;
     position: relative;
     width: 100%;
     height: 100%;
