@@ -2,7 +2,7 @@
 import Image from "next/image";
 import styles from "../page.module.css";
 import { useEffect, useState } from "react";
-import { getNotWonPrize, getWonPrizes, winPrize } from "../../lib/db/db";
+import { getNotWonPrize } from "../../lib/db/db";
 import { Prize } from "@/components/Prize/Prize";
 
 export default function Home({ params }: { params: Promise<{ tgId: string }> }) {

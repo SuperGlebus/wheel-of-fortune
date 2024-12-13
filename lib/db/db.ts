@@ -1,5 +1,3 @@
-import { createClient, createPool, sql } from "@vercel/postgres";
-import { randomInt } from "crypto";
 import supabase from "./supabaseClient";
 
 const allPrizes = [
