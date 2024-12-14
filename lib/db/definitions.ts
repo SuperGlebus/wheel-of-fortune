@@ -1,8 +1,9 @@
 
 
 export interface PrizeEntity {
-    id: number,
-    image?: string,
+    id: number
+    image?: string
     name: string
     price: string
+    url: string
 }

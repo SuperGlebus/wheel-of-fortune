@@ -1,4 +1,5 @@
 
+import { url } from "inspector";
 import { PrizeEntity } from "./definitions";
 import supabase from "./supabaseClient";
 
@@ -9,6 +10,7 @@ const allPrizes = [
     description: "dasdasdas",
     image: "/8.png",
     price: "990₽",
+    url: "https://t.me/wv_mars_bot?start=lm3"
   },
   {
     id: 4,
@@ -16,6 +18,7 @@ const allPrizes = [
     description: "dasdasdas",
     image: "/4.png",
     price: "5490₽",
+    url: "https://t.me/wv_mars_bot?start=lm5"
   },
   {
     id: 1,
@@ -23,6 +26,7 @@ const allPrizes = [
     description: "dasdasdas",
     image: "/1.png",
     price: "9990₽",
+    url: "https://t.me/wv_mars_bot?start=lm6"
   },
   {
     id: 6,
@@ -30,6 +34,7 @@ const allPrizes = [
     description: "dasdasdas",
     image: "/6.png",
     price: "2490₽",
+    url: "https://t.me/wv_mars_bot?start=lm7"
   },
   {
     id: 3,
@@ -37,6 +42,7 @@ const allPrizes = [
     description: "dasdasdas",
     image: "/3.png",
     price: "10 000₽/час",
+    url: "https://t.me/wv_mars_bot?start=lm4"
   },
   {
     id: 2,
@@ -44,6 +50,7 @@ const allPrizes = [
     description: "dasdasdas",
     image: "/2.png",
     price: "",
+    url: "https://t.me/wv_mars_bot?start=lm1"
   },
   {
     id: 7,
@@ -51,14 +58,16 @@ const allPrizes = [
     name: "Скидка на продукты 50% на 1 час",
     description: "dasdasdas",
     price: "",
+    url: "https://t.me/wv_mars_bot?start=lm2"
   },
-  {
-    id: 5,
-    name: "Бонус X",
-    description: "dasdasdas",
-    image: "/5.png",
-    price: "15 000 – 35 000₽",
-  },
+  // {
+  //   id: 5,
+  //   name: "Бонус X",
+  //   description: "dasdasdas",
+  //   image: "/5.png",
+  //   price: "15 000 – 35 000₽",
+  //   url: "https://t.me/wv_mars_bot?start=lm8"
+  // },
 ];
 
 export async function winPrize(tgId: string, prizeId: number) {
