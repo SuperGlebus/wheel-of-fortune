@@ -27,7 +27,9 @@
 }
 
 .Button {
-    background: linear-gradient(90deg, rgba(255, 221, 0, 1),
+    background:
+    linear-gradient(90deg,
+     rgba(255, 221, 0, 1),
      rgba(255, 221, 0, 1),
      rgba(255, 210, 3, 1),
      rgba(254, 194, 0, 1),
@@ -79,4 +81,8 @@
     display: block;
     
 
+}
+
+.ErrorContent {
+    margin-top: 50%;
 }

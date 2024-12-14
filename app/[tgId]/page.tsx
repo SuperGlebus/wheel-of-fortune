@@ -5,14 +5,16 @@ import { useEffect, useState } from "react";
 import { getNotWonPrize, winPrize } from "../../lib/db/db";
 import { Prize } from "@/components/Prize/Prize";
 import { PrizeEntity } from "@/lib/db/definitions";
-import { PopupWindow } from "@/components/PopupWindow/PopupWindow";
+import { ErrorPopupWindow, PopupWindow } from "@/components/PopupWindow/PopupWindow";
 import { useSearchParams } from "next/navigation";
 
 export default function Home({ params }: { params: Promise<{ tgId: string }> }) {
   let rotation = 0;
+  const [errorMessage, setErrorMessage] = useState("");
   const qParams = useSearchParams();
   const utm_medium = qParams.get("utm_medium");
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isErrorPopupOpen, setIsErrorPopupOpen] = useState(false);
   const [tgId, setTgId] = useState("");
   const [currentPrize, setCurrentPrize] = useState<PrizeEntity | null>(null);
   useEffect(() => {
@@ -36,10 +38,13 @@ export default function Home({ params }: { params: Promise<{ tgId: string }> }) 
   async function spinButton() {
 
     if (!currentPrize) {
-      console.log("all prizes won");
+      setErrorMessage("Призы закончились");
+      setIsErrorPopupOpen(true);
       return;
     }
     if (!utm_medium || utm_medium === "0") {
+      setErrorMessage("Попытки закончились");
+      setIsErrorPopupOpen(true);
       return;
     }
 
@@ -63,7 +68,7 @@ export default function Home({ params }: { params: Promise<{ tgId: string }> }) 
         wheel.style.transition = "none";
         rotation -= rotation;
       }
-    }, 4200);
+    }, 3200);
   }
 
   return (
@@ -141,6 +146,7 @@ export default function Home({ params }: { params: Promise<{ tgId: string }> }) 
         </Prize>
       </div>
       {currentPrize && <PopupWindow prize={currentPrize} isOpen={isPopupOpen} />}
+      <ErrorPopupWindow message={errorMessage} isOpen={isErrorPopupOpen} /> 
     </div>
   );
 }
