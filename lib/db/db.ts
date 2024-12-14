@@ -1,5 +1,4 @@
 
-import { url } from "inspector";
 import { PrizeEntity } from "./definitions";
 import supabase from "./supabaseClient";
 
