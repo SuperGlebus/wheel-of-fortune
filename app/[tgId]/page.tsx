@@ -61,11 +61,6 @@ export default function Home({ params }: { params: Promise<{ tgId: string }> }) 
         rotation -= rotation;
       }
     }, 4200);
-
-    
-
-
-    
   }
 
   return (
