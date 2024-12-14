@@ -104,7 +104,6 @@ export async function getWonPrizes(tgId: string): Promise<Wins[]> {
 
 export async function getNotWonPrize(tgId: string): Promise<PrizeEntity | null> {
   const wonPrizes = await getWonPrizes(tgId);
-  console.log(wonPrizes);
   const notWonPrizes = allPrizes.filter(prize =>
     !wonPrizes.some(wonPrize => wonPrize.prizeId === prize.id)
   );
@@ -112,7 +111,6 @@ export async function getNotWonPrize(tgId: string): Promise<PrizeEntity | null> 
     return null;
   }
   const wonPrize = getRandomElement(notWonPrizes)
-  console.log(wonPrize);
   return wonPrize
 }
 

@@ -6,9 +6,12 @@ import { getNotWonPrize, winPrize } from "../../lib/db/db";
 import { Prize } from "@/components/Prize/Prize";
 import { PrizeEntity } from "@/lib/db/definitions";
 import { PopupWindow } from "@/components/PopupWindow/PopupWindow";
+import { useSearchParams } from "next/navigation";
 
 export default function Home({ params }: { params: Promise<{ tgId: string }> }) {
   let rotation = 0;
+  const qParams = useSearchParams();
+  const utm_medium = qParams.get("utm_medium");
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [tgId, setTgId] = useState("");
   const [currentPrize, setCurrentPrize] = useState<PrizeEntity | null>(null);
@@ -16,7 +19,6 @@ export default function Home({ params }: { params: Promise<{ tgId: string }> }) 
     const fetchTgId = async () => {
       const tgId = (await params).tgId
       setTgId(tgId)
-      console.log("TgId", tgId);
       if (tgId) {
         const prize = await getNotWonPrize(tgId);
         if (prize) {
@@ -32,10 +34,12 @@ export default function Home({ params }: { params: Promise<{ tgId: string }> }) 
 
 
   async function spinButton() {
-    console.log("spin");
 
     if (!currentPrize) {
       console.log("all prizes won");
+      return;
+    }
+    if (!utm_medium || utm_medium === "0") {
       return;
     }
 
@@ -50,7 +54,6 @@ export default function Home({ params }: { params: Promise<{ tgId: string }> }) 
     wheel.style.transition = "transform 3s ease-out";
     wheel.style.transform = `rotate(${-rotation}deg)`;
     setTimeout(async() => {
-      console.log("stop");
       const isWon = await winPrize(tgId, currentPrize.id);
       if (isWon) {
         setIsPopupOpen(true);
