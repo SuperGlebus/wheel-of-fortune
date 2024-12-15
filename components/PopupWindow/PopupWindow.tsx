@@ -15,7 +15,7 @@ export function PopupWindow({ prize, isOpen }:
             <div className={styles.Content}>
                 <h2 className={styles.title}>Поздравляем!</h2>
                 <p className={styles.text}>Вы выиграли приз!</p>
-                <Image className={styles.Img} src={prize?.image || ""} alt={"приз"} width={150} height={150} />
+                <Image className={styles.Img} src={prize?.image || ""} alt={"приз"} width={150} height={150} priority />
                 <p className={styles.name}>{prize?.name}</p>
                 <p className={styles.price}>{prize?.price}</p>
 
