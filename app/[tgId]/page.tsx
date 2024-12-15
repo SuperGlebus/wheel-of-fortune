@@ -95,6 +95,7 @@ export default function Home({ params }: { params: Promise<{ tgId: string }> }) 
             alt="ram"
             width={400}
             height={400}
+            priority
           />
           <Image
             className={styles.wheel}
@@ -103,6 +104,7 @@ export default function Home({ params }: { params: Promise<{ tgId: string }> }) 
             alt="wheel"
             width={400}
             height={400}
+            priority
           />
           <Image
             className={styles.arrow}
@@ -110,6 +112,7 @@ export default function Home({ params }: { params: Promise<{ tgId: string }> }) 
             alt="wheel"
             width={400}
             height={400}
+            priority
           />
           <button className={styles.button} onClick={spinButton}>
             <Image
@@ -118,6 +121,7 @@ export default function Home({ params }: { params: Promise<{ tgId: string }> }) 
               alt="button"
               width={85}
               height={85}
+              priority
             ></Image>
             <h3 className={styles.buttonText}>Крутить</h3>
             <Image
@@ -126,6 +130,7 @@ export default function Home({ params }: { params: Promise<{ tgId: string }> }) 
               alt="button"
               width={80}
               height={80}
+              priority
             ></Image>
           </button>
         </div>
