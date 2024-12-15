@@ -32,7 +32,8 @@
     position: absolute;
     padding-bottom: 5px;
     padding-right: 3px;
-    transition: transform 4s ease-out;
+    animation: 2s spinner ease-in-out infinite;
+    transition: transform 3s ease-out;
 }
 
 .ram {
@@ -54,9 +55,6 @@
 
 }
 
-.spinForFun {
-    animation: spin 5s linear infinite;
-}
 
 .buttonImage {
     padding-top: 6px;
@@ -102,3 +100,14 @@ Read more: https://drafts.csswg.org/css-inline-3/#leading-trim
     line-height: 18px;
 }
 
+@keyframes spinner {
+    0% {
+        transform: rotate(-4deg);
+    }
+    50% {
+        transform: rotate(4deg);
+    }
+    100% {
+        transform: rotate(-4deg);
+    }
+}

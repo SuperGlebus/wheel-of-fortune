@@ -36,7 +36,6 @@ export default function Home({ params }: { params: Promise<{ tgId: string }> }) 
 
 
   async function spinButton() {
-
     if (!currentPrize) {
       setErrorMessage("Призы закончились");
       setIsErrorPopupOpen(true);
@@ -47,28 +46,42 @@ export default function Home({ params }: { params: Promise<{ tgId: string }> }) 
       setIsErrorPopupOpen(true);
       return;
     }
-
-    const degrees = Math.floor(currentPrize.id * 45 - Math.random() * 45) + 720;
+  
+    const degrees = Math.floor(currentPrize.id * 45 - Math.random() * 43) + 720;
     rotation += degrees;
     const wheel = document.querySelector("#wheel") as HTMLElement | null;
     if (!wheel) {
       console.error("wheel is null");
       return;
     }
-
+  
+    // Отключаем анимацию spinner
+    wheel.style.animation = "none";
+  
+    // Применяем переход для вращения
     wheel.style.transition = "transform 3s ease-out";
-    wheel.style.transform = `rotate(${-rotation}deg)`;
-    setTimeout(async() => {
+    requestAnimationFrame(() => {
+      wheel.style.transform = `rotate(${-rotation}deg)`;
+    })
+    
+  
+    // После завершения вращения
+    setTimeout(async () => {
       const isWon = await winPrize(tgId, currentPrize.id);
       if (isWon) {
         setIsPopupOpen(true);
       }
+  
+      // Сбрасываем анимацию и переход
       if (wheel) {
-        wheel.style.transform = "none";
-        wheel.style.transition = "none";
-        rotation -= rotation;
+        wheel.style.transform = "none"; // Сбрасываем transform
+        wheel.style.transition = "none"; // Сбрасываем transition
+        rotation = 0; // Сбрасываем угол поворота
+  
+        // Возвращаем анимацию spinner
+        wheel.style.animation = "2s spinner ease-in-out infinite";
       }
-    }, 3200);
+    }, 3200); // 3200 мс соответствует 3s переходу
   }
 
   return (
