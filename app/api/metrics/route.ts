@@ -58,7 +58,9 @@ export async function POST(req: Request) {
                     values: [["", tgId, 0, 0, 0, 0, 0, 0, 0, 0]],
                 },
             })
+            if (resp.status !== 200) {
             targetRowIndex = rows.length;
+            }
         }
 
         const targetRowNumber = targetRowIndex + 1;
