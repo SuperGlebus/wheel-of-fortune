@@ -25,7 +25,6 @@ export default function Home({ params }: { params: Promise<{ tgId: string }> }) 
             setTgId(tgId);
             if (tgId) {
                 const prize = await getRandomPrize(tgId);
-                console.log(prize);
                 if (prize) {
                     setCurrentPrize(prize);
                 }
@@ -36,8 +35,6 @@ export default function Home({ params }: { params: Promise<{ tgId: string }> }) 
 
     async function spinButton() {
         if (!currentPrize) {
-            console.log(currentPrize);
-
             setErrorMessage("Призы закончились");
             setIsErrorPopupOpen(true);
             return;

@@ -30,7 +30,6 @@ export const winPrize = async (tgId: string, prizeId: number): Promise<boolean> 
             body: JSON.stringify({ tgId, prizeId }),
         });
         const data = await res.json();
-        console.log(data);
         return data.message === 'Приз выигран';
     } catch (error) {
         console.error(error);
