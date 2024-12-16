@@ -29,7 +29,8 @@ const sheets = google.sheets({ version: 'v4', auth });
 
 export async function POST(req: Request) {
     const { tgId, prizeId } = await req.json();
-    console.log(process.env.CLIENT_EMAIL);
+    console.log(process.env.SPREADSHEET_ID, SPREADSHEET_ID);
+    console.log(process.env.CLIENT_EMAIL, process.env.PRIVATE_KEY);
 
     try {
         // Проверка на неправильный идентификатор приза
