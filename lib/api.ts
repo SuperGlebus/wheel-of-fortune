@@ -12,7 +12,6 @@ export const getRandomPrize = async (tgId: string): Promise<PrizeEntity | null> 
 
         });
         const prize: PrizeEntity = await res.json();
-        console.log(prize);
         return prize;
 
     } catch (error) {

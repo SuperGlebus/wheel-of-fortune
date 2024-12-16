@@ -59,12 +59,14 @@ export async function POST(req: Request) {
                 },
             })
             if (resp.status !== 200) {
-            targetRowIndex = rows.length;
+                return NextResponse.json({ message: 'Таблица пуста.' }, { status: 404 });
             }
+            targetRowIndex = rows.length;
         }
 
         const targetRowNumber = targetRowIndex + 1;
         const range = `${prizesInSheet[prizeId]}${targetRowNumber}`;
+        console.log(range);
 
         await sheets.spreadsheets.values.update({
             spreadsheetId: SPREADSHEET_ID,
