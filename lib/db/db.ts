@@ -5,7 +5,7 @@ import supabase from "./supabaseClient";
 const allPrizes = [
   {
     id: 8,
-    name: "Топ 3 способа раскачать тг канал",
+    name: "Топ 3 способа раскачать тг канал до 50 000 подписчиков",
     description: "dasdasdas",
     image: "/8.png",
     price: "990₽",
@@ -108,10 +108,28 @@ export async function getNotWonPrize(tgId: string): Promise<PrizeEntity | null> 
     !wonPrizes.some(wonPrize => wonPrize.prizeId === prize.id)
   );
   if (notWonPrizes.length === 0) {
-    return null;
+    await deleteWins(tgId);
+    return getNotWonPrize(tgId);
   }
   const wonPrize = getRandomElement(notWonPrizes)
   return wonPrize
+}
+
+export async function deleteWins(tgId: string) {
+  if (!tgId) {
+    throw new Error('tgId is null or undefined');
+  }
+  try {
+    const { error } = await supabase
+      .from('prizes')
+      .delete()
+      .eq('tgId', tgId);
+    if (error) throw error;
+    return true;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
 }
 
 export interface Wins {
