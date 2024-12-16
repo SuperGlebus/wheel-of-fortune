@@ -9,7 +9,7 @@ const SPREADSHEET_ID = process.env.SPREADSHEET_ID;
 // Аутентификация с использованием сервисного аккаунта
 const auth = new google.auth.JWT({
     email: process.env.CLIENT_EMAIL,
-    key: process.env.PRIVATE_KEY?.replace('"', ''),
+    key: process.env.PRIVATE_KEY?.replaceAll('"', ''),
     scopes: ['https://www.googleapis.com/auth/spreadsheets'],
 });
 
