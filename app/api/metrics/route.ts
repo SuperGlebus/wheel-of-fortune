@@ -5,11 +5,11 @@ import { NextResponse } from 'next/server';
 
 // Идентификатор таблицы
 const SPREADSHEET_ID = process.env.SPREADSHEET_ID;
-
+const privateKey = process.env.PRIVATE_KEY?.replace(/\\n/g, '\n').replaceAll('"', '');
 // Аутентификация с использованием сервисного аккаунта
 const auth = new google.auth.JWT({
     email: process.env.CLIENT_EMAIL,
-    key: process.env.PRIVATE_KEY?.replaceAll('"', ''),
+    key: privateKey,
     scopes: ['https://www.googleapis.com/auth/spreadsheets'],
 });
 
